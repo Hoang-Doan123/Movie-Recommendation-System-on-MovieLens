@@ -1,5 +1,6 @@
 Final Project Machine Learning and Data Mining 2
 ==============================
+* Lecturer: *Dr. Doan Nhat Quang*
 * Group ID: *19*
 * Project Name: *Movie-Recommendation-System-on-MovieLens*
 
