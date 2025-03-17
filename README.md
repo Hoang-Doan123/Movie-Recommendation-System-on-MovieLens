@@ -8,9 +8,11 @@ Members
 ==============================
 |ID|Name|
 |-|-|
-|BA12-035|Tran Viet Cuong|
-|BA12-078|Doan Duc Hoang|
-|BA12-088|Nguyen Vu Gia Huy|
-|BA12-102|Duong Dam Lam|
-|BA12-127|Trinh Quang Minh|
-|BA12-192|Nguyen Quoc Viet|
+|BA12-192|Nguyen Quoc Viet| data collection and processing |step 1|
+|BA12-102|Duong Dam Lam| Analyze and prepare the data |Step 2|
+|BA12-127|Trinh Quang Minh| All task (Support), Model building(CF) |Step 3|
+|BA12-078|Doan Duc Hoang| Model building & evaluation (SVD and Evaluation) |Step 4|
+|BA12-088|Nguyen Vu Gia Huy| Deploy get API |Step 5|
+|BA12-035|Tran Viet Cuong| Report and Slide Presentation , Analyze and prepare the data |Go through all step|
+
+
