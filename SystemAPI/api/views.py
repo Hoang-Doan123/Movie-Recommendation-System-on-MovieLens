@@ -6,10 +6,11 @@ from .serializer import *
 from main.model_selection import *
 import sys
 import os
+import nbimporter
 
 sys.path.append("..")
 
-from all_cells_code import item_based_recommend, recommend_top_k, precision_recall_f1_at_k
+from ipynb.fs.full.Svd_item_cf import recommend_similar_movies
 
 # Create your views here.
 class MovieList(generics.ListCreateAPIView):
@@ -39,11 +40,3 @@ def get_recommendations(request, movie_id):
 def get_item_recommendations(request, movie_id):
     recommendations = item_based_recommend(movie_id)
     return HttpResponse(recommendations.values)
-
-def get_top_recommendations(request, movie_id):
-    recommendations = recommend_top_k(movie_id)
-    return HttpResponse(",".join(list(map(str, recommendations))))
-
-def evaluations(request):
-    precision, recall, f1 = precision_recall_f1_at_k(5)
-    return HttpResponse(f"{precision}, {recall}, {f1}")
