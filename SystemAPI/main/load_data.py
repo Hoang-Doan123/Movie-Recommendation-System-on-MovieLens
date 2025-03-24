@@ -9,7 +9,7 @@ nltk.download("punkt", download_dir="E:/nltk_data")
 nltk.download("stopwords", download_dir="E:/nltk_data")
 nltk.download("wordnet", download_dir="E:/nltk_data")
 
-data = pd.read_csv("E:/Python Tests/API Tests/Django_/MovieRecommendationSystem/movielens_movies_with_descriptions.csv")
+data = pd.read_csv("../movielens_movies_with_descriptions.csv")
 
 def clean_text(text):
     text = re.sub(r"[^a-zA-Z]", " ", text)

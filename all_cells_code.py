@@ -3,6 +3,7 @@ import matplotlib
 from matplotlib import pyplot as plt
 import seaborn as sns
 import numpy as np
+import os
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
@@ -10,15 +11,35 @@ from sklearn.cluster import KMeans
 # pd.set_option('display.max_rows', None) # This code will display all of the dataframe
 # pd.reset_option('all') # Reset to default
 
-movies = pd.read_csv('movielens-1m/movies.dat', sep='::', engine='python', 
+if os.path.exists("movielens-1m/movies.dat"):
+    movie_dat_dir = "movielens-1m/movies.dat"
+else:
+    movie_dat_dir = "../movielens-1m/movies.dat"
+
+movies = pd.read_csv(movie_dat_dir, sep='::', engine='python', 
                         names=['movieId', 'title', 'genres'], encoding='ISO-8859-1')
 
-movies_with_des = pd.read_csv('movielens_movies_with_descriptions.csv', sep=',')
+if os.path.exists("movielens_movies_with_descriptions.csv"):
+    movies_with_des_dir = "movielens_movies_with_descriptions.csv"
+else:
+    movies_with_des_dir = "../movielens_movies_with_descriptions.csv"
 
-users = pd.read_csv('movielens-1m/users.dat', sep='::', engine='python',
+movies_with_des = pd.read_csv(movies_with_des_dir, sep=',')
+
+if os.path.exists('movielens-1m/users.dat'):
+    users_dir = 'movielens-1m/users.dat'
+else:
+    users_dir = '../movielens-1m/users.dat'
+
+users = pd.read_csv(users_dir, sep='::', engine='python',
                     names=['userId', 'gender', 'age', 'occupation', 'zip-code'], encoding='ISO-8859-1')
 
-ratings = pd.read_csv('movielens-1m/ratings.dat',
+if os.path.exists('movielens-1m/ratings.dat'):
+    ratings_dir = 'movielens-1m/ratings.dat'
+else:
+    ratings_dir = '../movielens-1m/ratings.dat'
+
+ratings = pd.read_csv(ratings_dir,
                       sep='::', engine='python', 
                       names=['userId', 'movieId', 'rating', 'timestamp'], encoding='ISO-8859-1')
 
@@ -66,9 +87,10 @@ def item_based_recommend(movie_id, top_n=5):
     recommended_movies = recommended_movies.sort_values(by='similarity', ascending=False).reset_index(drop=True)
 
     print(f"Top {top_n} similarity movies with Movie ID {movie_id}: \n{original_title} ({original_year}):")
+    print(recommended_movies)
     return recommended_movies
 
-item_based_recommend(1, 5)
+# item_based_recommend(1, 5)
 
 from sklearn.model_selection import train_test_split
 
@@ -110,9 +132,8 @@ for _, row in test_data.iterrows():
         true_ratings.append(row['rating'])
         pred_ratings.append(pred)
 
-print("RMSE:", mean_squared_error(true_ratings, pred_ratings, squared=False))
-print("MAE:", mean_absolute_error(true_ratings, pred_ratings))
-
+# print("RMSE:", mean_squared_error(true_ratings, pred_ratings, squared=False))
+# print("MAE:", mean_absolute_error(true_ratings, pred_ratings))
 
 def recommend_top_k(user_id, k=10):
     if user_id not in user_item_train.index:
@@ -167,6 +188,8 @@ def precision_recall_f1_at_k(k=10):
     print(f"Recall@{k}: {avg_recall:.4f}")
     print(f"F1@{k}: {f1:.4f}")
 
+    return avg_precision, avg_recall, f1
 
-precision_recall_f1_at_k(k=5)
-precision_recall_f1_at_k(k=10)
+
+# precision_recall_f1_at_k(k=5)
+# precision_recall_f1_at_k(k=10)
