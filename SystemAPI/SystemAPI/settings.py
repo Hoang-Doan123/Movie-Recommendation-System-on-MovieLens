@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api'
 ]
 
 MIDDLEWARE = [
@@ -76,7 +77,7 @@ WSGI_APPLICATION = 'SystemAPI.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'MoviewRecommendationSystem',  # Database name
+        'NAME': 'movierecommendationsystem',  # Database name
         'USER': 'postgres',
         'PASSWORD': 'huy17112003',  # Database password
         'HOST': 'localhost',  # Use the database server IP if hosted externally

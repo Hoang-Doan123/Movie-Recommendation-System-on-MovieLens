@@ -1,8 +1,16 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from rest_framework import generics
 from rest_framework.response import Response
-from serializer import *
+from .serializer import *
 from main.model_selection import *
+import sys
+import os
+import nbimporter
+
+sys.path.append("..")
+
+from ipynb.fs.full.Svd_item_cf import recommend_similar_movies
 
 # Create your views here.
 class MovieList(generics.ListCreateAPIView):
@@ -27,4 +35,8 @@ def get_recommendations(request, movie_id):
     names = [recommendations[i][0] for i in range(len(recommendations))]
     genres = [recommendations[i][1] for i in range(len(recommendations))]
 
-    return zip(names, genres)
+    return HttpResponse(list(zip(names, genres)))
+
+def get_item_recommendations(request, movie_id):
+    recommendations = item_based_recommend(movie_id)
+    return HttpResponse(recommendations.values)
